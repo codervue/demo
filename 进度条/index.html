@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #fa {
+            width: 200px;
+            height: 30px;
+            border: solid 1px black;
+            border-radius: 1em;
+        }
+
+        #son {
+            width: 0px;
+            background-color: rgb(9, 247, 68);
+            line-height: 30px;
+            border-radius: 1em;
+        }
+
+        #btn {
+            margin-top: 5px;
+            margin-left: 130px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fa">
+        <div id="son">
+            0%
+        </div>
+    </div>
+    <button id="btn">安装</button>
+    <script>
+        var son = document.getElementById("son")
+        var btn = document.getElementById("btn")
+        let num = 0
+        let clear = null
+        btn.onclick = function () {
+            //setInterval是异步的，所以先执行后面的函数
+            //if条件使之无法重复点击
+            if (clear == null) {
+                clear = setInterval(() => {
+                    num += 10
+                    son.style.width = num + "px"
+                    son.innerText = num / 2 + "%"
+                    if (num === 200) {
+                        clearInterval(clear)
+                    }
+                }, 500)
+            }
+
+        }
+    </script>
+</body>
+
+</html>

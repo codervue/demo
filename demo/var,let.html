@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        for (var i = 0; i < 10; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, 0)
+            //定时器是异步处理函数，等待for执行完时，再执行
+        }
+        for (let i = 0; i < 10; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, 100)
+        }//而let是块级作用域，每执行一次for循环会将i添加到定时器中
+    </script>
+</body>
+
+</html>

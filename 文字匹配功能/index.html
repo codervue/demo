@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            margin-left: 600px;
+        }
+
+        #empty {
+            width: 168px;
+            height: 300px;
+            background-color: #fff;
+            border: solid 1px rgb(228, 219, 219);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" id="input" placeholder="请输入关键字">
+        <button id="btn">搜索</button>
+        <div id="empty"></div>
+    </div>
+    <script>
+        let arr = ["iu怎么了", "iu是什么单位", "iu我老婆", "iu壁纸高清", "iu参演电视剧", "iu的拼音", "iu喜欢我","iu李知恩"];
+        let input = document.getElementById("input")
+        let empty = document.getElementById("empty")
+        //给键盘绑定事件，按下后弹出空白框
+        input.onkeyup = function () {
+            empty.style.display = 'block'
+            let str = "";//数组定义必须放里面，放外面会重复打印 
+            arr.forEach(item => {
+                let res = item.indexOf(input.value)
+                console.log(res)
+                if (res != -1) {
+                    str += "<p>" + item + "</p>"                   
+                }
+            })
+            if(!str){
+                empty.innerHTML = "暂无结果"
+            }else{
+                empty.innerHTML = str
+            }
+        }
+        //失去焦点后隐藏空白框
+        input.onblur = function () {
+            empty.style.display = "none"
+            input.value = ""
+        }
+
+    </script>
+</body>
+
+</html>

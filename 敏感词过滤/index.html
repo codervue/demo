@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <textarea name="" id="text1" cols="30" rows="10"></textarea>
+    <button id="btn">发布</button>
+    <textarea name="" id="text2" cols="30" rows="10"></textarea>
+    <script>
+        var text1 = document.getElementById("text1")
+        var btn = document.getElementById("btn")
+        var text2 = document.getElementById("text2")
+        let reg = /卧槽|他喵的/g
+        btn.onclick = function () {
+            //innerhtml无法传值，只能通过value
+            //text2.innerhtml = text1.innerhtml
+            var newValue = text1.value.replace(reg, "**")
+            text2.innerText = newValue
+        }
+    </script>
+</body>
+
+</html>

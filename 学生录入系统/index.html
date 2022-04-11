@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin-bottom: 10px;
+        }
+
+        #box {
+            width: 500px;
+            margin-left: 30%;
+        }
+
+        #box1 {
+            height: 300px;
+            border: solid 1px rgb(88, 72, 72);
+            padding-left: 5px;
+        }
+
+        #thead {
+            background-color: rgb(102, 187, 5);
+        }
+
+        #content {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="box1">
+            <h4>学生录入系统</h4>
+            <div>
+                <span>姓名:</span>
+                <input type="text" id="my">
+                <!-- id名不能命名为name -->
+            </div>
+            <div>
+                <span>年龄:</span>
+                <select name="" id="age">
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+            </div>
+            <div>
+                <span>性别:</span>
+                <select name="" id="sex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                    <option value="未知">未知</option>
+                </select>
+            </div>
+            <div>
+                <span>手机</span>
+                <input type="text" id="number">
+            </div>
+            <button id="btn">提交</button>
+        </div>
+        <div id="box2">
+            <table rules=all>
+                <thead id="thead">
+                    <tr>
+                        <th style="width: 100px;">姓名</th>
+                        <th style="width: 100px;">年龄</th>
+                        <th style="width: 100px;">性别</th>
+                        <th style="width: 200px;">手机</th>
+                        <th style="width: 100px;">编辑</th>
+                    </tr>
+                </thead>
+                <tbody id="content">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var my = document.getElementById("my")
+        var age = document.getElementById("age")
+        var sex = document.getElementById("sex")
+        var number = document.getElementById("number")
+        var btn = document.getElementById("btn")
+        var content = document.getElementById("content")
+        let str = []
+        btn.onclick = function () {
+            //创建对象
+            let obj = { name: my.value, age: age.value, sex: sex.value, number: number.value }
+            //传进空数组
+            str.push(obj)
+            console.log(str);
+            let tr = ""
+            //遍历数组
+            str.forEach((item, index) => {
+                //字符串拼接
+                tr += "<tr class='club'>" + "<td>" + item.name + "</td>" + "<td>" + item.age + "</td>" + "<td>" + item.sex + "</td>" + "<td>" + item.number + "</td>" + "<td onclick='del(" + index + ")'>删除</td>" + "</tr>";
+            })
+            //赋值给tbody
+            content.innerHTML = tr
+        }
+        //删除tbody
+        function del(index) {
+            console.log(index)
+            //删除数组中的这条信息
+            str.splice(index, 1)
+            //删除Dom中的信息
+            let res = document.getElementsByClassName("club")[index]
+            content.removeChild(res)
+        }
+    </script>
+</body>
+
+</html>

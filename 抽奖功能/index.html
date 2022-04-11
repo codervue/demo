@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 650px;
+            margin-left: 30%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            width: 200px;
+            height: 200px;
+            border: solid 1px red;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        #start {
+            width: 200px;
+            height: 200px;
+            border: solid 1px red;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        #act {
+            background-color: red;
+        }
+
+        .btn:active {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div class="option" id="act">iPhone13 pro max</div>
+        <div class="option">Macbook 14pro</div>
+        <div class="option">谢谢惠顾</div>
+        <div class="option">Audi Rs7</div>
+        <div id="start" class="btn">点击抽奖</div>
+        <div class="option">保送江西软件大学</div>
+        <div class="option">南极七日游</div>
+        <div class="option">500万</div>
+        <div class="option">雷克萨斯ES300</div>
+    </div>
+    <script>
+        var start = document.getElementById("start")
+        var option = document.getElementsByClassName("option")
+        var arr = ["0", "1", "2", "4", "7", "6", "5", "3",]
+        var num = 0
+        let timer = null
+        start.onclick = function () {
+            start.className = "btn"
+            //设置定时器，每隔50毫秒执行
+            timer = setInterval(next, 50)
+            //随机时间后移除定时器
+            let hour = Math.round(Math.random() * 5000)
+            console.log(hour);
+            setTimeout("clear()", hour)
+        }
+        //定时执行函数
+        function next() {
+            num++
+            //除去之前的样式
+            for (i = 0; i < arr.length; i++) {
+                option[i].id = ""
+            }
+            //第二轮重新执行
+            if (num > arr.length - 1) {
+                num = 0
+            }
+            option[arr[num]].id = "act"
+        }
+        //除去定时器执行函数
+        function clear() {
+            clearInterval(timer)
+            alert(option[arr[num]].innerText)
+        }
+
+        ////////////////////////////////////////////////
+        // var adopt = false
+        // function a1() {
+        //     setTimeout(function () {
+        //         // console.log(1)
+        //         adopt = true
+        //         return adopt
+        //     }, 10)
+        // }
+        // // console.log(adopt);
+        // function a2() {
+        //     console.log(2)
+        // }
+        // function a3() {
+        //     a1()
+        //     if (!adopt) {
+        //         // console.log(adopt);
+        //         return //退出当前整个方法，所以a2不会执行
+        //     }
+        //     a2()
+        // }
+        // console.log(adopt);
+        // a3()
+        // console.dir(Promise)
+        // console.log("------------");
+        // async function aa() {
+        //     return new Promise((resolve, reject) => {
+        //         //用定时器包起来是为了更直观的效果
+        //         if (1 < 2) {
+        //             // setTimeout(() => {
+        //             resolve('1');
+        //             // }, 5000)
+        //         } else {
+        //             setTimeout(() => {
+        //                 reject('2');
+        //             }, 5000)
+        //         }
+        //     })
+        // }
+        // async function bb() {
+        //     await aa().then((res) => {
+        //         console.log(res, '成功')
+        //     }).catch((err) => {
+        //         console.log(err, '错误')
+        //     })
+        //     console.log('11111');
+        // }
+        // bb();
+    </script>
+</body>
+
+</html>

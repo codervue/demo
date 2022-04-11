@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        #box {
+            width: 500px;
+            height: 300px;
+            position: relative;
+        }
+        /* 必须加上宽高，否则圆点父亲是浏览器 */
+        
+        img {
+            width: 500px;
+            height: 300px;
+        }
+        
+        #list {
+            position: relative;
+        }
+        
+        .item {
+            position: absolute;
+            opacity: 0;
+            transition: all 1s;
+        }
+        
+        .btn {
+            width: 30px;
+            height: 70px;
+            top: 100px;
+            position: absolute;
+            z-index: 100;
+            opacity: 0.2;
+            /* 透明度 */
+        }
+        
+        #right {
+            left: 470px;
+        }
+        
+        .item.active {
+            z-index: 10;
+            opacity: 1;
+        }
+        
+        #point-box {
+            z-index: 1000;
+            list-style: none;
+            position: absolute;
+            bottom: 20px;
+            left: 45%;
+        }
+        
+        .point {
+            width: 8px;
+            height: 8px;
+            float: left;
+            margin-right: 8px;
+            border-radius: 100%;
+            background-color: rgb(102, 95, 95);
+            cursor: pointer;
+            /* 手指属性 */
+        }
+        
+        .point.active {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="list">
+            <li class="item active"><img src="./img/1.jpg" alt=""></li>
+            <li class="item"><img src="./img/2.jpg" alt=""></li>
+            <li class="item"><img src="./img/3.jpg" alt=""></li>
+            <li class="item"><img src="./img/4.jpg" alt=""></li>
+            <li class="item"><img src="./img/5.jpg" alt=""></li>
+        </ul>
+        <ul id="point-box">
+            <li class="point active" data-index="0"></li>
+            <li class="point" data-index="1"></li>
+            <li class="point" data-index="2"></li>
+            <li class="point" data-index="3"></li>
+            <li class="point" data-index="4"></li>
+        </ul>
+        <button class="btn" id="left">
+            < </button>
+        <button class="btn" id="right">></button>
+    </div>
+
+    <script>
+        //获取按钮标签
+        var items = document.getElementsByClassName("item")
+        var points = document.getElementsByClassName("point")
+        var left = document.getElementById("left")
+        var right = document.getElementById("right")
+        var box = document.getElementById("box")
+            //初始化下标值，表示第Index张显示在当前页面
+        var index = 0
+            //封装清除active函数，只允许一张图片被添加active类名
+        var clearActive = function() {
+                for (var i = 0; i < items.length; i++) {
+                    items[i].className = 'item';
+                    points[i].className = "point"
+                }
+            }
+            //将当前Index图片添加active类
+        var goIndex = function() {
+                clearActive()
+                items[index].className = "item active"
+                points[index].className = "point active"
+            }
+            //封装goNext函数，实现切换下一个图片
+        var goNext = function() {
+                //判断当到第五张时，继续循环
+                if (index < 4) {
+                    index++
+                } else {
+                    index = 0
+                }
+                goIndex()
+            }
+            //封装切换上一张函数
+        var goPre = function() {
+                //判断当index为0时
+                if (index == 0) {
+                    index = 4
+                } else {
+                    index--
+                }
+                goIndex()
+            }
+            //给right按钮绑定事件
+        window.onload = function() {
+                right.addEventListener("click", function() {
+                    goNext()
+                })
+                left.addEventListener("click", function() {
+                    goPre()
+                })
+            }
+            //给point绑定事件
+        for (var i = 0; i < points.length; i++) {
+            points[i].addEventListener("mouseover", function() {
+                var pointIndex = this.getAttribute("data-index")
+                index = pointIndex
+                goIndex()
+            })
+        }
+        //定时器封装
+        var timer
+
+        function myVar() {
+            timer = setInterval(function() {
+                goNext()
+            }, 2000)
+        }
+        //打开页面后执行定时器
+        setTimeout(myVar, 0)
+            //鼠标移入清除定时器
+        box.onmouseover = function() {
+                clearInterval(timer)
+            }
+            //鼠标移出打开定时器
+        box.onmouseout = function() {
+            myVar()
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #text {
+            display: inline-block;
+            background-color: rgb(155, 198, 204);
+            font-size: 35px;
+            color: red;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        #next {
+            font-size: 10px;
+            color: royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span>验证码:</span>
+        <i><span id="text"></span></i>
+        <span id="next"><i><a href="">看不清,换一张</a></i></span>
+        <br />
+        请输入验证码:<input type="text" class="input">
+        <button id="btn">提交</button>
+    </div>
+    <script>
+        window.onload = function () {
+            var res = getCode()
+            function getCode() {
+                //设定数字和字母数组
+                var arr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+                //设置一个空数组，用来接收验证码
+                var str = []
+                //遍历得到6位数
+                for (var i = 0; i < 6; i++) {
+                    //取0-36整数
+                    var num = Math.round(Math.random() * 35)
+                    // 将下标对应值传入空数组
+                    str += arr[num]
+                }
+                return str
+            }
+            //将str传入span标签中
+            var text = document.getElementById("text")
+            text.innerText = res
+            //验证对比
+            var btn = document.getElementById("btn")
+            btn.onclick = function () {
+                var text = document.getElementById("text")
+                var input = document.getElementsByClassName("input")[0]
+                if (input.value === "") {
+                    alert("请输入验证码")
+                } else if (input.value != text.innerText) {
+                    alert("您输入的验证码不正确")
+                    input.value = ""
+                } else {
+                    window.location = "http://www.baidu.com"
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

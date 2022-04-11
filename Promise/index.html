@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        function getData(url, data = {}) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    success: function (res) {
+                        resolve(res)
+                    },
+                    error: function (res) {
+                        reject(res)
+                    }
+                })
+            })
+        }
+        getData("data.json").then((res) => {
+            // console.log(res);
+            const { id } = res
+            // console.log(id);
+            return getData("data1.json", { id })
+        }).then(res => {
+            const { username } = res
+            // console.log(username);
+            return getData("data2.json", { username })
+        }).then(res => {
+            console.log(res);//打印不出来，因为Promise处于pending状态
+        })
+    </script>
+</body>
+
+</html>

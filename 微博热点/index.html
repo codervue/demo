@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        #box {
+            margin-left: 30%;
+            position: relative;
+        }
+
+        #hot {
+            margin-left: 120px;
+        }
+
+        #btn {
+            position: absolute;
+            left: 60%;
+        }
+
+        #text li {
+            list-style: none;
+            margin-bottom: 15px;
+
+        }
+
+        #text li a {
+            text-decoration: none;
+            border-bottom: solid 1px rgb(207, 198, 198);
+        }
+
+        #text li span {
+            position: absolute;
+            left: 60%;
+            border-bottom: solid 1px rgb(207, 198, 198);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <span id="hot"><i>百度热搜</i></span>
+        <button id="btn">换一换</button>
+        <div id="content">
+            <ul id="text">
+                <li><a href="">浪漫中国 新变化 建功新时代 春日画卷</a><span>100000000</span></li>
+                <li><a href="">行程码崩了怎么办？ 青岛坚决遏制疫情蔓延势头</a><span>70000000</span></li>
+                <li><a href="">31省份新增本土“3507+1647”</a><span>67000000</span></li>
+                <li><a href="">赶集在春天 烟火满人间</a><span>55000000</span></li>
+                <li><a href="">'看到我们的'口罩脸'，总书记很心疼'</a><span>50000000</span></li>
+                <li><a href="">用好“双奥”遗产宝贵财富 校园里 冬奥精神在回响</a><span>46000000</span></li>
+                <li><a href="">这十年，总书记的两会故事</a><span>40000000</span></li>
+                <li><a href="">全过程人民民主具有强大生命力</a><span>38000000</span></li>
+                <li><a href="">冬残奥会闭幕，何时打卡场馆？这份指南请查收</a><span>36000000</span></li>
+                <li><a href="">中方敦促美国政府在网络空间领域采取更加负责任的态度</a><span>25000000</span></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $("#btn").click(function () {
+            $.ajax({
+                type: "get",
+                url: "./index.json",
+                data: {},
+                dataType: "json",
+                success: function (res) {
+                    let datas = res.data
+                    let str = ""
+                    datas.forEach(item => {
+                        str += "<li>" + "<a href=''>" + item.title + "</a>" + "<span>" + item.num + "</span>" + "</li>"
+                    });
+                    $("ul li").remove()
+                    $("ul").append(str)
+                    console.log(str);
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

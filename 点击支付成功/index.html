@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>课程名称:WEB</h2>
+    <p>原价:1200</p>
+    <p>现价:19.9</p>
+    <p>课程内容:三件套</p>
+    <p>地址:上海市</p>
+    <p>
+        <button class="btn1">取消支付</button>
+        <button class="btn2">去支付</button>
+    </p>
+    <script>
+        var btn1 = document.getElementsByClassName("btn1")
+        var btn2 = document.getElementsByClassName("btn2")
+        //类名返回的是数组，所以必须加上索引
+        btn2[0].addEventListener("click", function () {
+            let res = window.confirm("确定支付")
+            if (res) {
+                alert("支付成功")
+            }
+        })
+        btn1[0].addEventListener("click", function () {
+            let res = window.confirm("确定取消")
+            if (res) {
+                location.href = "./concel.html"
+            }
+        })
+
+    </script>
+</body>
+
+</html>

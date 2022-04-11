@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #jump {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            font-size: 30px;
+            color: red;
+        }
+
+        #pay {
+            display: inline;
+        }
+
+        #btn {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <p>课程名称:WEB</p>
+    <p>现价:19.9</p>
+    <!-- span是行内元素，不能设置宽高，因P是块级元素，所以独占一行 -->
+    <span id="jump">10</span>
+    <p id="pay">支付正在取消. . . . .</p>
+    <!-- button是行内块元素 -->
+    <button id="btn">立即返回</button>
+    <script>
+        window.onload = function () {
+            let time = 10
+            var timer = function () {
+                time--
+                document.getElementById("jump").innerHTML = time
+                if (time == 0) {
+                    location.href = "./index.html"
+                }
+            }
+            setInterval(timer, 1000)
+        }
+        document.getElementById("btn").onclick = function () {
+            location.href = "./index.html"
+        }
+    </script>
+</body>
+
+</html>

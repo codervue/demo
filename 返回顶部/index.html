@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 2000px;
+        }
+        
+        #div {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(68, 28, 214);
+        }
+        
+        #btn {
+            display: none;
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="div">首页</div>
+        <button id="btn">返回</button>
+    </div>
+    <script>
+        var btn = document.getElementById("btn")
+        window.onscroll = function() {
+            let res = document.documentElement.scrollTop //滚动条到顶部的距离
+            console.log(res);
+            if (res >= 400) {
+                btn.style.display = "block"
+            } else {
+                btn.style.display = "none"
+            }
+        }
+        btn.onclick = function() {
+            document.documentElement.scrollTop = 0
+        }
+
+        console.log(document.documentElement.scrollTop);
+    </script>
+</body>
+
+</html>
